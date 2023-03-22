@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Memory_Match.Panel_uri;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,9 @@ namespace Memory_Match
         public Form1()
         {
             InitializeComponent();
+
+            this.Controls.Add(new pnlStart(this));
+
         }
     }
 }
