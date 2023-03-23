@@ -63,6 +63,9 @@
     <Compile Include="Panel-uri\pnlGame.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Panel-uri\pnlLogin.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Panel-uri\pnlStart.cs">
       <SubType>Component</SubType>
     </Compile>
