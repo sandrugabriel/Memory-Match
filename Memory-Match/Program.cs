@@ -1,4 +1,5 @@
-﻿using Memory_Match.Forms;
+﻿using Memory_Match.Controllers;
+using Memory_Match.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace Memory_Match
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormLogin());
+
+
         }
     }
 }
