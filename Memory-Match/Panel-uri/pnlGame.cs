@@ -271,6 +271,8 @@ namespace Memory_Match.Panel_uri
                 timer.Enabled = false;
                 string a = "Timpul s-a terminat!";
                 MessageBox.Show(a, "Stop", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                this.form.removePnl("pnlGame");
+                this.form.Controls.Add(new pnlStart(form, form.score));
             }
 
            // selectpic[0] = pct1;
