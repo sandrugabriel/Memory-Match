@@ -10,7 +10,10 @@ namespace Memory_Match.Panel_uri
 {
     internal class pnlStart:Panel
     {
+
         Label lblNameGame;
+
+        Label lblScore;
 
         Button btnStart;
 
@@ -18,7 +21,7 @@ namespace Memory_Match.Panel_uri
 
         Form1 form;
 
-        public pnlStart(Form1 form1)
+        public pnlStart(Form1 form1, int score)
         {
             form = form1;
             this.Name = "pnlStart";
@@ -39,6 +42,16 @@ namespace Memory_Match.Panel_uri
             this.lblNameGame.Location = new System.Drawing.Point((form.Width - 300) / 2, 5);
             this.lblNameGame.Anchor = AnchorStyles.Top;
 
+            //LblScore
+            lblScore = new Label();
+            this.Controls.Add(lblScore);
+
+            this.lblScore.Text = "Score: " + score.ToString();
+            this.lblScore.AutoSize = true;
+            this.lblScore.Font = font;
+            this.lblScore.Location = new System.Drawing.Point((form.Width - 1100) / 2, 5);
+            this.lblScore.Anchor = AnchorStyles.Top;
+
             //PictureBox
             pictureBox1 = new PictureBox();
             this.Controls.Add(pictureBox1);
@@ -58,9 +71,17 @@ namespace Memory_Match.Panel_uri
             this.btnStart.Size = new System.Drawing.Size(130,60);
             this.btnStart.Font = font;
             this.btnStart.Anchor = AnchorStyles.Top;
+            this.btnStart.Click += new EventHandler(btnStart_Click);
         }
 
+        private void btnStart_Click(object sender, EventArgs e)
+        {
 
+            this.form.removePnl("pnlStart");
+            this.form.WindowState = FormWindowState.Maximized;
+            this.form.Controls.Add(new pnlGame(form));
+
+        }
 
 
     }
