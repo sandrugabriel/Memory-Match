@@ -13,12 +13,14 @@ namespace Memory_Match.Models
         private int id;
         private string name;
         private string password;
+        private int score;
 
-        public Client(int id, string name, string password)
+        public Client(int id, string name, string password, int score)
         {
             this.id = id;
             this.name = name;
             this.password = password;
+            this.score = score;
         }
 
         public Client(string text)
@@ -29,6 +31,7 @@ namespace Memory_Match.Models
             this.id = int.Parse(prop[0]);   
             this.name = prop[1];
             this.password = prop[2];
+            this.score = int.Parse(prop[3]);
 
         }
 
@@ -41,6 +44,16 @@ namespace Memory_Match.Models
         public string getPassword() { 
             return password; }
         
+        public int getScore()
+        {
+            return score;
+        }
+
+        public void setScore(int score)
+        {
+            this.score = score;
+        }
+
         public string descriere()
         {
 
@@ -51,6 +64,11 @@ namespace Memory_Match.Models
             t += "Password: " + getPassword() + "\n";
 
             return t;
+        }
+
+        public string toSave()
+        {
+            return id.ToString() + "," + name + "," + password + "," + score.ToString();
         }
 
     }

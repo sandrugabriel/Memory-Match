@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Memory_Match.Panel_uri
 {
-    internal class pnlLogin:Panel
+    internal class pnlSignUp:Panel
     {
 
         PictureBox pictureBox;
@@ -23,7 +24,7 @@ namespace Memory_Match.Panel_uri
 
         FormLogin form;
 
-        Button btnLog;
+        Button btnSignUp;
 
         LinkLabel linkLabel;
 
@@ -31,18 +32,20 @@ namespace Memory_Match.Panel_uri
 
         List<string> erori;
 
-        public pnlLogin(FormLogin form1) {
+
+        public pnlSignUp(FormLogin form1) {
+
 
             erori = new List<string>();
             controllerClients = new ControllerClients();
             form = form1;
             this.form.Size = new System.Drawing.Size(461, 580);
-            this.Name = "pnlLogin";
+            this.Name = "pnlSignUp";
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.Size = new System.Drawing.Size(form.Size.Width,form.Size.Height);
+            this.Size = new System.Drawing.Size(form.Size.Width, form.Size.Height);
             this.BringToFront();
 
-            Font font = new Font("Microsoft YaHei UI Light",20);
+            Font font = new Font("Microsoft YaHei UI Light", 20);
             Font font1 = new Font("Microsoft YaHei UI Light", 24);
             Font font2 = new Font("Microsoft YaHei UI Light", 18);
             //Picture
@@ -53,53 +56,53 @@ namespace Memory_Match.Panel_uri
             this.pictureBox.Location = new System.Drawing.Point(90, 23);
             this.pictureBox.Size = new System.Drawing.Size(246, 117);
             this.pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            this.pictureBox.Image = Image.FromFile(Application.StartupPath + @"/images/login.png");
+            this.pictureBox.Image = Image.FromFile(Application.StartupPath + @"/images/sign.png");
 
             //Name
             pctName = new PictureBox();
             this.Controls.Add(pctName);
-            this.pctName.Location = new System.Drawing.Point(35,179);
+            this.pctName.Location = new System.Drawing.Point(35, 179);
             this.pctName.SizeMode = PictureBoxSizeMode.StretchImage;
             this.pctName.Size = new System.Drawing.Size(75, 75);
-            this.pctName.Image = Image.FromFile(Application.StartupPath+@"/images/user.png");
+            this.pctName.Image = Image.FromFile(Application.StartupPath + @"/images/add-user.png");
 
             txtName = new TextBox();
             this.Controls.Add(txtName);
             this.txtName.Location = new System.Drawing.Point(150, 200);
             this.txtName.Font = font2;
-            this.txtName.Size = new System.Drawing.Size(190,10);
+            this.txtName.Size = new System.Drawing.Size(190, 10);
 
             //Password
             pctPass = new PictureBox();
             this.Controls.Add(pctPass);
-            this.pctPass.Location = new System.Drawing.Point(35,279);
+            this.pctPass.Location = new System.Drawing.Point(35, 279);
             this.pctPass.Size = new System.Drawing.Size(75, 75);
             this.pctPass.SizeMode = PictureBoxSizeMode.StretchImage;
-            this.pctPass.Image = Image.FromFile(Application.StartupPath+@"/images/locked.png");
+            this.pctPass.Image = Image.FromFile(Application.StartupPath + @"/images/locked.png");
 
-            txtPassword = new TextBox();    
+            txtPassword = new TextBox();
             this.Controls.Add(txtPassword);
-            this.txtPassword.Location = new System.Drawing.Point(150,300);
+            this.txtPassword.Location = new System.Drawing.Point(150, 300);
             this.txtPassword.Font = font2;
             this.txtPassword.Size = new System.Drawing.Size(190, 10);
             this.txtPassword.UseSystemPasswordChar = true;
 
             //Button Login
-            btnLog = new Button();
-            this.Controls.Add(btnLog);
+            btnSignUp = new Button();
+            this.Controls.Add(btnSignUp);
 
-            this.btnLog.Location = new System.Drawing.Point(155,390);
-            this.btnLog.Text = "Login";
-            this.btnLog.Font = font;
-            this.btnLog.Size = new System.Drawing.Size(130,60);
-            this.btnLog.Click += new EventHandler(btnLog_Click);
+            this.btnSignUp.Location = new System.Drawing.Point(155, 390);
+            this.btnSignUp.Text = "Sign Up";
+            this.btnSignUp.Font = font;
+            this.btnSignUp.Size = new System.Drawing.Size(130, 60);
+            this.btnSignUp.Click += new EventHandler(btnSignUp_Click);
 
             //Link
             linkLabel = new LinkLabel();
             this.Controls.Add(linkLabel);
 
-            this.linkLabel.Location = new System.Drawing.Point(340,500);
-            this.linkLabel.Text = "Sing Up";
+            this.linkLabel.Location = new System.Drawing.Point(340, 500);
+            this.linkLabel.Text = "Login";
             this.linkLabel.AutoSize = true;
             this.linkLabel.Font = font2;
             this.linkLabel.Click += new EventHandler(linkLabel_Click);
@@ -108,11 +111,12 @@ namespace Memory_Match.Panel_uri
 
         }
 
+
         private void linkLabel_Click(object sender, EventArgs e)
         {
 
-            this.form.removepnl("pnlLogin");
-            this.form.Controls.Add(new pnlSignUp(form));
+            this.form.removepnl("pnlSignUp");
+            this.form.Controls.Add(new pnlLogin(form));
 
         }
 
@@ -129,41 +133,37 @@ namespace Memory_Match.Panel_uri
             {
                 erori.Add("Nu ati introdus parola");
             }
-            string a = txtName.Text;
-            string b = txtPassword.Text;
-            if(a.Length >=1 && b.Length >=1)
-            if (!controllerClients.verificare(txtName.Text, txtPassword.Text))
-            {
-                erori.Add("Ati introdus numele/parola gresit");
-            }
-
+          
         }
 
-        private void btnLog_Click(object sender, EventArgs e)
+        private void btnSignUp_Click(object sender, EventArgs e)
         {
 
             erorrs();
 
-            if(erori.Count > 0)
+            if (erori.Count > 0)
             {
 
-                for(int i = 0;i<erori.Count; i++)
+                for (int i = 0; i < erori.Count; i++)
                 {
-                    MessageBox.Show(erori[i],"Errors",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    MessageBox.Show(erori[i], "Errors", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
             else
             {
 
-            string name = txtName.Text;
-            string pass = txtPassword.Text;
+                string name = txtName.Text;
+                string pass = txtPassword.Text;
+                int id = controllerClients.generareId();
+                int score = 0;
 
-                int id = controllerClients.idByName(name,pass);
-                int score = controllerClients.scoreById(id);
-                Form1 form2 = new Form1(score,id);
+                string textul = id.ToString() + "," + name + "," + pass + "," + score.ToString();
+                controllerClients.addClient(textul);
+
+                Form1 form2 = new Form1(score, id);
                 form2.Show();
-               
+
 
             }
 

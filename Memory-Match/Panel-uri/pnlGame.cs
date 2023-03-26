@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Memory_Match.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -49,9 +50,15 @@ namespace Memory_Match.Panel_uri
         Button btnExit;
         Button btnRestart;
 
-        public pnlGame(Form1 form1) { 
+        private int id;
+
+        ControllerClients controllerClients;
+
+        public pnlGame(Form1 form1, int id1) { 
         
+            controllerClients = new ControllerClients();
             form = form1;
+            id = id1;
             list = new List<string>();
             this.Name = "pnlGame";
             this.Size = new System.Drawing.Size(form.Size.Width, form.Size.Height);
@@ -251,7 +258,7 @@ namespace Memory_Match.Panel_uri
         {
 
             this.form.removePnl("pnlGame");
-            this.form.Controls.Add(new pnlGame(form));
+            this.form.Controls.Add(new pnlGame(form,id));
 
         }
 
@@ -272,7 +279,7 @@ namespace Memory_Match.Panel_uri
                 string a = "Timpul s-a terminat!";
                 MessageBox.Show(a, "Stop", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 this.form.removePnl("pnlGame");
-                this.form.Controls.Add(new pnlStart(form, form.score));
+                this.form.Controls.Add(new pnlStart(form, form.score,form.id));
             }
 
            // selectpic[0] = pct1;
@@ -303,10 +310,12 @@ namespace Memory_Match.Panel_uri
                 timer.Enabled = false;
                 MessageBox.Show("Ai castigat!", "Win", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 form.score++;
+                controllerClients.setScore(id,form.score);
+                controllerClients.save();
                 this.form.removePnl("pnlGame");
-                this.form.Controls.Add(new pnlStart(form, form.score));
+                this.form.Controls.Add(new pnlStart(form, form.score,form.id));
                  
-               
+              
                 
             }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Memory_Match.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -21,9 +22,15 @@ namespace Memory_Match.Panel_uri
 
         Form1 form;
 
-        public pnlStart(Form1 form1, int score)
+        private int id;
+
+        ControllerClients controllerClients;
+
+        public pnlStart(Form1 form1, int score, int id1)
         {
+            id = id1;
             form = form1;
+            controllerClients = new ControllerClients();
             this.Name = "pnlStart";
             this.Size = new System.Drawing.Size(form.Size.Width, form.Size.Height);
             this.Location = new System.Drawing.Point(0, 0);
@@ -46,10 +53,10 @@ namespace Memory_Match.Panel_uri
             lblScore = new Label();
             this.Controls.Add(lblScore);
 
-            this.lblScore.Text = "Score: " + score.ToString();
+            this.lblScore.Text = "High score: " + score.ToString();
             this.lblScore.AutoSize = true;
             this.lblScore.Font = font;
-            this.lblScore.Location = new System.Drawing.Point((form.Width - 1100) / 2, 5);
+            this.lblScore.Location = new System.Drawing.Point((form.Width) -200, 45);
             this.lblScore.Anchor = AnchorStyles.Top;
 
             //PictureBox
@@ -79,7 +86,7 @@ namespace Memory_Match.Panel_uri
 
             this.form.removePnl("pnlStart");
             this.form.WindowState = FormWindowState.Maximized;
-            this.form.Controls.Add(new pnlGame(form));
+            this.form.Controls.Add(new pnlGame(form,id));
 
         }
 
