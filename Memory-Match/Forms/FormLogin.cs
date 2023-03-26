@@ -92,7 +92,10 @@ namespace Memory_Match.Forms
 
         private void btnSignUp_Click(object sender, EventArgs e)
         {
-
+            this.Controls.Add(new pnlSignUp(this));
+            this.btnLogin.Visible = false;
+            this.btnSignUp.Visible = false;
+            this.pictureBox1.Visible = false;
 
 
         }

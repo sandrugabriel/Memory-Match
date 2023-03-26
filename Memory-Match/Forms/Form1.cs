@@ -1,4 +1,6 @@
-﻿using Memory_Match.Panel_uri;
+﻿using Memory_Match.Controllers;
+using Memory_Match.Forms;
+using Memory_Match.Panel_uri;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,13 +16,24 @@ namespace Memory_Match
 {
     public partial class Form1 : Form
     {
-        public int score=0;
 
-        public Form1()
+        ControllerClients controllerClients;
+
+        public int score;
+
+        public int id;
+
+        public Form1(int score1, int id1)
         {
             InitializeComponent();
+            id = id1;
 
-            this.Controls.Add(new pnlStart(this,score));
+            score = score1;
+            controllerClients = new ControllerClients();
+            
+            this.Controls.Add(new pnlStart(this,score,id1));
+
+
 
         }
 
